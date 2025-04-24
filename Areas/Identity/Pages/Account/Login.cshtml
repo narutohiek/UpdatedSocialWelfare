@@ -1,0 +1,137 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<!-- Section: Design Block -->
+<section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center">
+                <!-- Left Text Column -->
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="my-5 display-3 fw-bold ls-tight">
+                        Welcome Back<br />
+                        <span class="text-primary">Log in to your account</span>
+                    </h1>
+                    <p style="color: hsl(217, 10%, 50.8%)">
+                        Enter your credentials below to access your dashboard.
+                    </p>
+                </div>
+
+                <!-- Right Form Column -->
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="card">
+                        <div class="card-body py-5 px-md-5">
+                            <form id="account" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                                <!-- Email input with floating label -->
+                                <div class="form-floating mb-4">
+                                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="JohnDoe@gmail.com" />
+                                    <label asp-for="Input.Email">Email address</label>
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+
+                                <!-- Password input with floating label and eye icon -->
+                                <div class="form-floating mb-4 position-relative">
+                                    <input asp-for="Input.Password" class="form-control pe-5" id="passwordInput" type="password" autocomplete="current-password" aria-required="true" placeholder=" " />
+                                    <label asp-for="Input.Password">Password</label>
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                                    <!-- Eye icon -->
+                                    <button type="button" class="btn btn-outline-secondary position-absolute top-50 end-0 translate-middle-y me-2 p-1 border-0 bg-transparent" id="togglePassword" tabindex="-1">
+                                        <i class="fas fa-eye" id="eyeIcon"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Remember Me Checkbox -->
+                                <div class="form-check d-flex justify-content-start mb-4">
+                                    <input class="form-check-input me-2" asp-for="Input.RememberMe" />
+                                    <label class="form-check-label" asp-for="Input.RememberMe">
+                                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                    </label>
+                                </div>
+
+                                <!-- Submit button -->
+                                <button id="login-submit" type="submit" class="btn btn-primary btn-block mb-4 w-100">
+                                    Log in
+                                </button>
+
+                                <!-- Additional Links -->
+                                <div class="text-center">
+                                    <p>
+                                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                                    </p>
+                                    <p>
+                                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                                    </p>
+                                    <p>
+                                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                                    </p>
+                                </div>
+
+                                <!-- External login buttons -->
+                                @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+                                {
+                                    <div class="text-center mt-4">
+                                        <p>or log in with:</p>
+                                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                            @foreach (var provider in Model.ExternalLogins!)
+                                            {
+                                                <button type="submit" class="btn btn-link btn-floating mx-1" name="provider" value="@provider.Name" title="Log in using @provider.DisplayName">
+                                                    <i class="fab fa-@provider.Name.ToLower()"></i>
+                                                </button>
+                                            }
+                                        </form>
+                                    </div>
+                                }
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <!-- Font Awesome CDN for eye icon -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Floating label fix
+        $(document).ready(function () {
+            $(".form-floating input").each(function () {
+                if ($(this).val() !== "") {
+                    $(this).addClass("filled");
+                }
+            });
+
+            $(".form-floating input").on("input", function () {
+                if ($(this).val() !== "") {
+                    $(this).addClass("filled");
+                } else {
+                    $(this).removeClass("filled");
+                }
+            });
+        });
+
+        // Password toggle
+        document.getElementById("togglePassword").addEventListener("click", function () {
+            const passwordInput = document.getElementById("passwordInput");
+            const eyeIcon = document.getElementById("eyeIcon");
+
+            const isPassword = passwordInput.type === "password";
+            passwordInput.type = isPassword ? "text" : "password";
+            eyeIcon.classList.toggle("fa-eye");
+            eyeIcon.classList.toggle("fa-eye-slash");
+        });
+    </script>
+}

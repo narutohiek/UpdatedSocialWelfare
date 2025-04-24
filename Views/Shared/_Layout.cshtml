@@ -1,0 +1,141 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    var currentPath = Context.Request.Path;
+
+    // Page detection
+    var isHomePage = currentPath == "/" || currentPath == "/Home" || currentPath == "/Home/Index";
+    var isLoginPage = currentPath.StartsWithSegments("/Account/Login") ||
+                      currentPath.StartsWithSegments("/Account/Register") ||
+                      currentPath.StartsWithSegments("/Identity/Account/Login") ||
+                      currentPath.StartsWithSegments("/Identity/Account/Register");
+
+    var isFormPage = currentPath.StartsWithSegments("/CertificateOfIndigencyForm") ||
+                     currentPath.StartsWithSegments("/ConsultationForms") ||
+                     currentPath.StartsWithSegments("/FoodPacksForms");
+
+    var isAdminArea = ViewBag.IsAdminArea != null && ViewBag.IsAdminArea == true;
+    var isLoggedIn = User.Identity.IsAuthenticated;
+
+    var showHeader = !isLoginPage && !isFormPage;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Government</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/responsive.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/jquery.mCustomScrollbar.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" />
+    <link rel="icon" href="~/images/fevicon.png" type="image/gif" />
+</head>
+<body>
+    <!-- Only show the header (nav and logo) if NOT on login/register page -->
+    @if (showHeader)
+    {
+        <div id="home" class="header_section">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+                    <div class="logo">
+                        <a href="#home">
+                            <img src="~/images/logo-New.png" alt="Logo" style="max-height: 60px; width: auto;" />
+                        </a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item"><a class="nav-link" href="#home" style="scroll-behavior: smooth;">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#services" style="scroll-behavior: smooth;">Services</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#about" style="scroll-behavior: smooth;">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#project" style="scroll-behavior: smooth;">Events</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#contact" style="scroll-behavior: smooth;">Contact</a></li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                @await Html.PartialAsync("_LoginPartial")
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    }
+
+    <!-- Only show the banner if NOT on login/register page -->
+    @if (showHeader)
+    {
+        <div class="banner_section layout_padding" style="background-image: url('@Url.Content("~/images/banner.png")'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; height: 100vh;">
+            <div class="container">
+                <div class="card banner-card text-center mx-auto">
+                    <div class="card-body">
+                        <h1 class="furniture_text">GOVERNMENT AND SOCIAL WELFARE BENEFITS</h1>
+                        <p class="there_text">
+                            A local government unit (LGU) responsible for providing social welfare programs and services to its residents.
+                        </p>
+                        <div class="contact_bt_main mt-3">
+                            <div class="contact_bt">
+                                <a href="contact.html" class="btn btn-light-blue">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Main Content -->
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light py-5">
+        <div class="container px-4 px-lg-5">
+            <div class="small text-center text-muted">&copy; 2023 - CSWDO</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/js/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/js/popper.min.js" asp-append-version="true"></script>
+    <script src="~/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script src="~/js/jquery-3.0.0.min.js" asp-append-version="true"></script>
+    <script src="~/js/plugin.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.mCustomScrollbar.concat.min.js" asp-append-version="true"></script>
+    <script src="~/js/custom.js" asp-append-version="true"></script>
+    <script src="~/js/owl.carousel.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script>
+        window.addEventListener('scroll', function() {
+          const navbar = document.querySelector('.navbar');
+          if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

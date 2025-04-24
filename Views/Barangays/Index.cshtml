@@ -1,0 +1,80 @@
+﻿@model IEnumerable<SocialWelfarre.Models.Barangay>
+
+@{
+    ViewData["Title"] = "Barangay Management";
+    Layout = "/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<!-- Barangay List Table -->
+<div class="card">
+    <div class="card-body">
+        <div class="form-section">
+            <table id="example1" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Id)</th>
+                        <th>@Html.DisplayNameFor(model => model.Barangays)</th>
+                        <th>Edit</th>
+                        <th>View</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Barangays)</td>
+                            <td>
+                                <!-- Edit Button -->
+                                <button type="button" class="btn btn-warning btn-action" data-bs-toggle="modal" data-bs-target="#editModal_@item.Id">
+                                    <i class="fa fa-edit"></i> Edit
+                                </button>
+                            </td>
+                            <td>
+                                <!-- View Button -->
+                                <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#detailsModal_@item.Id">
+                                    <i class="fa fa-eye"></i> View
+                                </button>
+                            </td>
+                            <td>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-action"><i class="fa fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+
+                        <!-- Edit Modal -->
+                        <div class="modal fade" id="editModal_@item.Id" tabindex="-1" aria-labelledby="editModalLabel_@item.Id" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModalLabel_@item.Id">Edit Barangay</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Edit Form inside the Modal -->
+                                        <form asp-action="Edit" method="post">
+                                            <input type="hidden" name="Id" value="@item.Id" />
+                                            <div class="form-group">
+                                                <label for="Barangays">Barangay Name</label>
+                                                <input type="text" class="form-control" name="Barangays" value="@item.Barangays" required />
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS and necessary dependencies (jQuery and Popper.js) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

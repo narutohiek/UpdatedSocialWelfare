@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SocialWelfarre.Models.Designation>
+
+@{
+    ViewData["Title"] = "Designations Management";
+    Layout = "/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<!-- Add Designation Form Card -->
+<div class="card">
+    <div class="card-body">
+        <div class="form-section">
+            <h4><i class="fas fa-plus-circle"></i> Add New Designation</h4>
+            <form asp-action="Create" method="post">
+                <div class="form-group">
+                    <label for="Designations" class="form-label"><i class="fas fa-briefcase"></i> Designation Name</label>
+                    <input type="text" class="form-control" id="Designations" name="Designations" placeholder="Enter Designation Name" required>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Add Designation</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Designations Table Card -->
+<div class="card">
+    <div class="card-body">
+        <div class="form-section">
+        <table id="example1" class="table table-striped">
+            <thead>
+                <tr>
+                        <th>@Html.DisplayNameFor(model => model.Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.Designations)</th>
+                    <th>Edit</th>
+                    <th>View</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Designations)</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-action"><i class="fa fa-edit"></i> Edit</a>
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary-action btn-action"><i class="fa fa-eye"></i> View</a>
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-action"><i class="fa fa-trash"></i> Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>

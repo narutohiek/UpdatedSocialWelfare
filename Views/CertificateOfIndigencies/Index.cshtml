@@ -1,0 +1,120 @@
+﻿@model IEnumerable<SocialWelfarre.Models.CertificateOfIndigency>
+
+@{
+    ViewData["Title"] = "Certificates of Indigency Management";
+    Layout = "/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<!-- Add Certificate of Indigency Form Card -->
+<div class="card">
+    <div class="card-body">
+        <div class="form-section">
+            <h4><i class="fas fa-file-alt"></i> Add New Certificate of Indigency</h4>
+            <form asp-action="Create" method="post">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="First_Name" class="form-label"><i class="fas fa-user"></i> First Name</label>
+                        <input type="text" class="form-control" id="First_Name" name="First_Name" placeholder="Enter First Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Middle_Name" class="form-label"><i class="fas fa-user"></i> Middle Name</label>
+                        <input type="text" class="form-control" id="Middle_Name" name="Middle_Name" placeholder="Enter Middle Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="Last_Name" class="form-label"><i class="fas fa-user"></i> Last Name</label>
+                        <input type="text" class="form-control" id="Last_Name" name="Last_Name" placeholder="Enter Last Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="BarangayId" class="form-label"><i class="fas fa-building"></i> Barangay</label>
+                        <select class="form-control" id="BarangayId" name="BarangayId" required>
+                            <option value="">Select Barangay</option>
+                            @foreach (var barangay in ViewBag.Barangays)
+                            {
+                                <option value="@barangay.Value">@barangay.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="Date_Issued" class="form-label"><i class="fas fa-calendar-alt"></i> Date Issued</label>
+                        <input type="date" class="form-control" id="Date_Issued" name="Date_Issued" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Validate" class="form-label"><i class="fas fa-check-circle"></i> Validate</label>
+                        <input type="text" class="form-control" id="Validate" name="Validate" placeholder="Enter Validation Status" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Add Certificate</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Certificates of Indigency Table Card -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-container">
+            <table id="example1" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>First</th>
+                        <th>Middle</th>
+                        <th>Last</th>
+                        <th>Barangay</th>
+                        <th>Date Issued</th>
+                        <th>Validate</th>
+                        <th>Edit</th>
+                        <th>View</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.First_Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Middle_Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Last_Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Barangay.Barangays)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Date_Issued)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Validate)</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-action"><i class="fa fa-edit"></i> Edit</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary-action btn-action"><i class="fa fa-eye"></i> View</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-action"><i class="fa fa-trash"></i> Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Initialize Flatpickr for the Date Issued field
+        document.addEventListener("DOMContentLoaded", function () {
+            flatpickr("#Date_Issued", {
+                dateFormat: "d/m/Y",
+                allowInput: true,
+                clickOpens: true,
+                wrap: false
+            });
+        });
+
+        
+    </script>
+}
