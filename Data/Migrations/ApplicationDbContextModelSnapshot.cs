@@ -262,7 +262,7 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Barangays");
+                    b.ToTable("Barangays", (string)null);
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.Beneficiary", b =>
@@ -314,7 +314,7 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasIndex("BeneficiaryTypeId");
 
-                    b.ToTable("Beneficiaries");
+                    b.ToTable("Beneficiaries", (string)null);
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.BeneficiaryType", b =>
@@ -331,7 +331,7 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BeneficiaryTypes");
+                    b.ToTable("BeneficiaryTypes", (string)null);
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.CertificateOfIndigency", b =>
@@ -368,7 +368,7 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasIndex("BarangayId");
 
-                    b.ToTable("CertificateOfIndigencies");
+                    b.ToTable("CertificateOfIndigencies", (string)null);
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.Consultation", b =>
@@ -406,7 +406,7 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Consultations");
+                    b.ToTable("Consultations", (string)null);
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.Department", b =>
@@ -423,7 +423,7 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.Designation", b =>
@@ -440,7 +440,7 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Designations");
+                    b.ToTable("Designations", (string)null);
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.DisasterKit", b =>
@@ -477,7 +477,7 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasIndex("BarangayId");
 
-                    b.ToTable("DisasterKits");
+                    b.ToTable("DisasterKits", (string)null);
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.FoodPack", b =>
@@ -514,7 +514,7 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasIndex("BarangayId");
 
-                    b.ToTable("FoodPacks");
+                    b.ToTable("FoodPacks", (string)null);
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.Program1", b =>
@@ -545,7 +545,7 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Programs");
+                    b.ToTable("Programs", (string)null);
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.Role", b =>
@@ -562,7 +562,7 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

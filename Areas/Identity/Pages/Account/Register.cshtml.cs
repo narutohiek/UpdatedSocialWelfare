@@ -21,7 +21,7 @@ using Microsoft.Extensions.Logging;
 using SocialWelfarre.Models;
 
 namespace SocialWelfarre.Areas.Identity.Pages.Account
-{
+{   
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {

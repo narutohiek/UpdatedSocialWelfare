@@ -23,7 +23,7 @@ namespace SocialWelfarre.Data
 
         public DbSet<Consultation> Consultations { get; set; }
         public DbSet<BeneficiaryType> BeneficiaryTypes { get; set; }
-        public DbSet<Role> Roles { get; set; } 
+     
         public DbSet<Department> Departments { get; set; }
         public DbSet<Designation> Designations { get; set; }
    
