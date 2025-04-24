@@ -1,11 +1,11 @@
-﻿using GovermentSystem.Models;
+﻿using SocialWelfarre.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SocialWelfarre.Models;
+
 
 namespace SocialWelfarre.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
           : base(options)
@@ -23,16 +23,13 @@ namespace SocialWelfarre.Data
 
         public DbSet<Consultation> Consultations { get; set; }
         public DbSet<BeneficiaryType> BeneficiaryTypes { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<User> Users { get; set; } 
+        public DbSet<Role> Roles { get; set; } 
         public DbSet<Department> Departments { get; set; }
         public DbSet<Designation> Designations { get; set; }
-        public DbSet<User> User { get; set; }
-
+   
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
 
         }
 
