@@ -8,4 +8,5 @@ namespace SocialWelfarre.Models
         public int Id { get; set; }
         public string Barangays { get; set; }
     }
+
 }
