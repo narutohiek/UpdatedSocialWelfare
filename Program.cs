@@ -8,20 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-{
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 12;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireLowercase = false;
-    options.User.RequireUniqueEmail = true;
-    options.SignIn.RequireConfirmedAccount = false;
-    options.SignIn.RequireConfirmedEmail = false;
-    options.SignIn.RequireConfirmedPhoneNumber = false;
-})
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders()
     .AddRoles<IdentityRole>()
