@@ -1,0 +1,44 @@
+﻿@* @model SocialWelfare.Models.FoodPackForm
+
+@{
+    ViewData["Title"] = "View Food Pack Form";
+}
+
+<h2>View Food Pack Form</h2>
+
+<div>
+    <p><strong>First Name:</strong> @Model.FirstName</p>
+    <p><strong>Middle Name:</strong> @Model.MiddleName</p>
+    <p><strong>Last Name:</strong> @Model.LastName</p>
+    <p><strong>Full Name:</strong> @Model.FullName</p>
+    <p><strong>Age:</strong> @Model.Age</p>
+    <p><strong>Barangay:</strong> @Model.Barangay</p>
+    <p><strong>Address:</strong> @Model.Address</p>
+    <p><strong>Contact Number:</strong> @Model.ContactNumber</p>
+    <p><strong>Status:</strong> @Model.Status</p>
+
+    <h3>Barangay Certificate</h3>
+    @if (!string.IsNullOrEmpty(Model.BarangayCertificateFileName))
+    {
+        <a href="@Model.BarangayCertificateFileName" target="_blank">
+            <img src="@Model.BarangayCertificateFileName" alt="Barangay Certificate" style="max-width: 100%; height: auto;" />
+        </a>
+    }
+    else
+    {
+        <p>No Barangay Certificate uploaded.</p>
+    }
+
+    <h3>Valid ID</h3>
+    @if (!string.IsNullOrEmpty(Model.ValidIdFileName))
+    {
+        <a href="@Model.ValidIdFileName" target="_blank">
+            <img src="@Model.ValidIdFileName" alt="Valid ID" style="max-width: 100%; height: auto;" />
+        </a>
+    }
+    else
+    {
+        <p>No Valid ID uploaded.</p>
+    }
+</div>
+ *@

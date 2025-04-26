@@ -1,0 +1,39 @@
+﻿@* @model IEnumerable<SocialWelfarre.Models.FoodPackForm>
+
+@{
+    ViewData["Title"] = "Admin Area";
+}
+
+<h2>Submitted Food Pack Forms</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var form in Model)
+        {
+            <tr>
+                <td>@form.FirstName</td>
+                <td>@form.LastName</td>
+                <td>@form.Age</td>
+                <td>@form.Status</td>
+                <td>
+                    <a href="@Url.Action("ViewForm", new { id = form.Id })">View</a>
+                    @if (form.Status == "Pending")
+                    {
+                        <a href="@Url.Action("Accept", new { id = form.Id })">Accept</a>
+                        <a href="@Url.Action("Reject", new { id = form.Id })">Reject</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+ *@

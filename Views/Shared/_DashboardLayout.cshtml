@@ -239,100 +239,57 @@
                                 <p>Dashboard</p>
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a asp-controller="UserManager" asp-action="Index" asp-area="" class="nav-link @IsActive("UserManager", "Index")">
-                                <i class="nav-icon fas fa-users"></i>
+                            <a asp-controller="Users" asp-action="Index" asp-area="" class="nav-link @IsActive("Users", "Index")">
+                                <i class="nav-icon fas fa-user"></i>
                                 <p>Users</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a asp-controller="ApplicationFoodPacks1" asp-action="Index" asp-area="" class="nav-link @IsActive("ApplicationFoodPacks1", "Index")">
+                                <i class="nav-icon fas fa-box"></i>
+                                <p>Food Pack</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Certificate_Of_Indigency" asp-action="Index" asp-area="" class="nav-link @IsActive("Certificate_Of_Indigency", "Index")">
+                                <i class="nav-icon fas fa-certificate"></i>
+                                <p>Certificate_Of_Indigency</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="DisasterKitTransactions" asp-action="Index" asp-area="" class="nav-link @IsActive("DisasterKitTransactions", "Index")">
+                                <i class="fas fa-first-aid nav-icon"></i>
+                                <p>Disaster Kit</p>
+                            </a>    
+                        </li>
 
-                        <li class="nav-item @IsTreeviewOpen("FoodPacks", "DisasterKits", "CertificateOfIndigencies")">
+                        <li class="nav-item @IsTreeviewOpen("", "DisasterKits", "CertificateOfIndigencies")">
                             <a href="#" class="nav-link @IsTreeviewLinkActive("FoodPacks", "DisasterKits", "CertificateOfIndigencies")">
                                 <i class="nav-icon fas fa-hand-holding-heart"></i>
                                 <p>
-                                    Relief Distribution
+                                    Inventory Management
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview pl-4">
                                 <li class="nav-item">
-                                    <a asp-controller="FoodPacks" asp-action="Index" asp-area="" class="nav-link @IsActive("FoodPacks")">
+                                    <a asp-controller="FoodPacksInventories" asp-action="Index" asp-area="" class="nav-link @IsActive("FoodPacksInventories")">
                                         <i class="fas fa-box-open nav-icon"></i>
-                                        <p>Food Packs</p>
+                                        <p>Food Pack Inventory</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a asp-controller="DisasterKits" asp-action="Index" asp-area="" class="nav-link @IsActive("DisasterKits")">
                                         <i class="fas fa-first-aid nav-icon"></i>
-                                        <p>Disaster Kit</p>
+                                        <p>Disaster Kit Inventory</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a asp-controller="CertificateOfIndigencies" asp-action="Index" asp-area="" class="nav-link @IsActive("CertificateOfIndigencies")">
-                                        <i class="fas fa-certificate nav-icon"></i>
-                                        <p>Certificate of Indigency</p>
-                                    </a>
-                                </li>
+                               
                             </ul>
                         </li>
 
-                        <li class="nav-item @IsTreeviewOpen("Roles", "Designations", "Departments", "BeneficiaryTypes", "Barangays")">
-                            <a href="#" class="nav-link @IsTreeviewLinkActive("Roles", "Designations", "Departments", "BeneficiaryTypes", "Barangays")">
-                                <i class="nav-icon fas fa-table"></i>
-                                <p>
-                                    System Administration
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview pl-4">
-                                <li class="nav-item">
-                                    <a asp-controller="Roles" asp-action="Index" asp-area="" class="nav-link @IsActive("Roles")">
-                                        <i class="fas fa-user-tag nav-icon"></i>
-                                        <p>Role</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-controller="Designations" asp-action="Index" asp-area="" class="nav-link @IsActive("Designations")">
-                                        <i class="fas fa-briefcase nav-icon"></i>
-                                        <p>Designation</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-controller="Departments" asp-action="Index" asp-area="" class="nav-link @IsActive("Departments")">
-                                        <i class="fas fa-building nav-icon"></i>
-                                        <p>Department</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-controller="BeneficiaryTypes" asp-action="Index" asp-area="" class="nav-link @IsActive("BeneficiaryTypes")">
-                                        <i class="fas fa-heart nav-icon"></i>
-                                        <p>Beneficiary Type</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-controller="Barangays" asp-action="Index" asp-area="" class="nav-link @IsActive("Barangays")">
-                                        <i class="fas fa-map-marker-alt nav-icon"></i>
-                                        <p>Barangay</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a asp-controller="Program1" asp-action="Index" asp-area="" class="nav-link @IsActive("Program1")">
-                                <i class="nav-icon fas fa-tasks"></i>
-                                <p>Programs</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a asp-controller="Beneficiaries" asp-action="Index" asp-area="" class="nav-link @IsActive("Beneficiaries")">
-                                <i class="fas fa-handshake nav-icon"></i>
-                                <p>Beneficiaries</p>
-                            </a>
-                        </li>
-
+                     
                         <li class="nav-item">
                             <a asp-controller="Consultations" asp-action="Index" asp-area="" class="nav-link @IsActive("Consultations")">
                                 <i class="nav-icon fas fa-user-md"></i>
@@ -412,7 +369,8 @@
     <script src="~/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="~/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="~/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <!-- Initialize DataTable -->
     <script>
         $(function () {

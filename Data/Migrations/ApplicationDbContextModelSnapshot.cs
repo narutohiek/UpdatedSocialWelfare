@@ -155,6 +155,62 @@ namespace SocialWelfarre.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("SocialWelfarre.Models.ApplicationFoodPack", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Barangay")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Brgy_Cert")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Packs")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Reason")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Valid_ID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationFoodPack");
+                });
+
             modelBuilder.Entity("SocialWelfarre.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -248,7 +304,7 @@ namespace SocialWelfarre.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("SocialWelfarre.Models.Barangay", b =>
+            modelBuilder.Entity("SocialWelfarre.Models.AuditLog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -256,82 +312,36 @@ namespace SocialWelfarre.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Barangays")
+                    b.Property<string>("ActionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ActionTaken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ControllerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Barangays");
-                });
-
-            modelBuilder.Entity("SocialWelfarre.Models.Beneficiary", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BarangayId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BeneficiaryTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Contact_Number")
-                        .HasColumnType("int");
-
-                    b.Property<DateOnly>("Date_Of_Birth")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Eligibility_Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("First_Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ID_Number")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Last_Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Middle_Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BarangayId");
-
-                    b.HasIndex("BeneficiaryTypeId");
-
-                    b.ToTable("Beneficiaries");
-                });
-
-            modelBuilder.Entity("SocialWelfarre.Models.BeneficiaryType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BeneficiaryTypes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BeneficiaryTypes");
+                    b.ToTable("AuditLogs");
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.CertificateOfIndigency", b =>
@@ -341,6 +351,9 @@ namespace SocialWelfarre.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Barangay")
+                        .HasColumnType("int");
 
                     b.Property<int>("BarangayId")
                         .HasColumnType("int");
@@ -366,9 +379,60 @@ namespace SocialWelfarre.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BarangayId");
-
                     b.ToTable("CertificateOfIndigencies");
+                });
+
+            modelBuilder.Entity("SocialWelfarre.Models.Certificate_Of_Indigency", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Barangay")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Brgy_Cert")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Reason")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Valid_ID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Certificate_Of_Indigencies");
                 });
 
             modelBuilder.Entity("SocialWelfarre.Models.Consultation", b =>
@@ -409,7 +473,7 @@ namespace SocialWelfarre.Data.Migrations
                     b.ToTable("Consultations");
                 });
 
-            modelBuilder.Entity("SocialWelfarre.Models.Department", b =>
+            modelBuilder.Entity("SocialWelfarre.Models.DisasterKitTransaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -417,70 +481,27 @@ namespace SocialWelfarre.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Departments")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departments");
-                });
-
-            modelBuilder.Entity("SocialWelfarre.Models.Designation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Barangay")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Designations")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Designations");
-                });
-
-            modelBuilder.Entity("SocialWelfarre.Models.DisasterKit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("NumberOfPacks")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BarangayId")
+                    b.Property<int>("Reason")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date_Issued")
+                    b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("First_Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Last_Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Middle_Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Validate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<TimeSpan>("TransactionTime")
+                        .HasColumnType("time");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BarangayId");
-
-                    b.ToTable("DisasterKits");
+                    b.ToTable("DisasterKitTransactions");
                 });
 
-            modelBuilder.Entity("SocialWelfarre.Models.FoodPack", b =>
+            modelBuilder.Entity("SocialWelfarre.Models.FoodPackForm", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -488,36 +509,54 @@ namespace SocialWelfarre.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BarangayId")
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date_Issued")
+                    b.Property<string>("Barangay")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("First_Name")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Last_Name")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Middle_Name")
+                    b.Property<string>("MiddleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Validate")
+                    b.Property<byte[]>("PictureData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("PicturePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BarangayId");
-
-                    b.ToTable("FoodPacks");
+                    b.ToTable("FoodPackForms");
                 });
 
-            modelBuilder.Entity("SocialWelfarre.Models.Program1", b =>
+            modelBuilder.Entity("SocialWelfarre.Models.FoodPacksInventory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -525,27 +564,29 @@ namespace SocialWelfarre.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ApplicationFoodPackId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Eligibility_Criteria")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AvailableStocks")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("End_Date")
+                    b.Property<int>("StockOut")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalAvailableStocks")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Program_Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Start_Date")
+                    b.Property<DateTime>("TransactionTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Programs");
+                    b.HasIndex("ApplicationFoodPackId");
+
+                    b.ToTable("FoodPacksInventories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -599,56 +640,15 @@ namespace SocialWelfarre.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SocialWelfarre.Models.Beneficiary", b =>
+            modelBuilder.Entity("SocialWelfarre.Models.FoodPacksInventory", b =>
                 {
-                    b.HasOne("SocialWelfarre.Models.Barangay", "Barangay")
+                    b.HasOne("SocialWelfarre.Models.ApplicationFoodPack", "ApplicationFoodPacks")
                         .WithMany()
-                        .HasForeignKey("BarangayId")
+                        .HasForeignKey("ApplicationFoodPackId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SocialWelfarre.Models.BeneficiaryType", "BeneficiaryType")
-                        .WithMany()
-                        .HasForeignKey("BeneficiaryTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Barangay");
-
-                    b.Navigation("BeneficiaryType");
-                });
-
-            modelBuilder.Entity("SocialWelfarre.Models.CertificateOfIndigency", b =>
-                {
-                    b.HasOne("SocialWelfarre.Models.Barangay", "Barangay")
-                        .WithMany()
-                        .HasForeignKey("BarangayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Barangay");
-                });
-
-            modelBuilder.Entity("SocialWelfarre.Models.DisasterKit", b =>
-                {
-                    b.HasOne("SocialWelfarre.Models.Barangay", "Barangay")
-                        .WithMany()
-                        .HasForeignKey("BarangayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Barangay");
-                });
-
-            modelBuilder.Entity("SocialWelfarre.Models.FoodPack", b =>
-                {
-                    b.HasOne("SocialWelfarre.Models.Barangay", "Barangay")
-                        .WithMany()
-                        .HasForeignKey("BarangayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Barangay");
+                    b.Navigation("ApplicationFoodPacks");
                 });
 #pragma warning restore 612, 618
         }

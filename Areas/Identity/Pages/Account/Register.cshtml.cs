@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -21,7 +20,7 @@ using Microsoft.Extensions.Logging;
 using SocialWelfarre.Models;
 
 namespace SocialWelfarre.Areas.Identity.Pages.Account
-{   
+{
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
@@ -51,15 +50,14 @@ namespace SocialWelfarre.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-
-
             [Required]
             [Display(Name = "Employee ID Number")]
             public int EmpNo { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Username is required.")]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
+            [RegularExpression("^[a-zA-Z0-9._-]*$", ErrorMessage = "Username can only contain letters, digits, dots, underscores, or hyphens.")]
             [Display(Name = "Username")]
-            [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Username can only contain letters or digits.")] // <--- THIS IS WHERE YOU ENFORCE THE RULE
             public string UserName { get; set; }
 
             [Required]
@@ -83,6 +81,10 @@ namespace SocialWelfarre.Areas.Identity.Pages.Account
             public string Gender { get; set; }
 
             [Required]
+            [Display(Name = "PhoneNumber")]
+            public string PhoneNumber { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -93,11 +95,10 @@ namespace SocialWelfarre.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Address")]
-            public String Address { get; set; }
-
+            public string Address { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 12)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -120,22 +121,25 @@ namespace SocialWelfarre.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { };
-                user.EmpNo = Input.EmpNo;
-                user.UserName = Input.UserName;
-                user.First_Name = Input.First_Name;
-                user.Middle_Name = Input.Middle_Name;
-                user.Last_Name = Input.Last_Name;
-                user.Age = Input.Age;
-                user.IsMale = Input.Gender == "Male"; // ✅ Converts "Male" or "Female" string to bool
-                user.Email = Input.Email;
-                user.DateOfBirth = Input.DateOfBirth;
-                user.Address = Input.Address;
+                var user = new ApplicationUser
+                {
+                    UserName = Input.UserName,
+                    Email = Input.Email,
+                    EmpNo = Input.EmpNo,
+                    First_Name = Input.First_Name,
+                    Middle_Name = Input.Middle_Name,
+                    Last_Name = Input.Last_Name,
+                    Age = Input.Age,
+                    IsMale = Input.Gender == "Male",
+                    PhoneNumber = Input.PhoneNumber,
+                    DateOfBirth = Input.DateOfBirth,
+                    Address = Input.Address
+                };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("User created a new account with username: {UserName}, email: {Email}", user.UserName, user.Email);
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -160,11 +164,11 @@ namespace SocialWelfarre.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
+                    _logger.LogWarning("User creation failed: {ErrorCode} - {ErrorDescription}", error.Code, error.Description);
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
     }

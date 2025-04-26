@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SocialWelfarre.Models.FoodPack>
+﻿@* @model IEnumerable<SocialWelfarre.Models.ApplicationFoodPack>
 
 @{
     ViewData["Title"] = "Food Packs Management";
@@ -11,6 +11,8 @@
     <div class="card-body">
         <div class="form-section">
             <h4><i class="fas fa-box"></i> Add New Food Pack</h4>
+            <a asp-controller="FoodPackController" asp-action="AdminArea" class="btn btn-info">Admin Area!</a>
+            <a asp-controller="FoodPackController" asp-action="ViewForm" class="btn btn-info">View Form</a>
             <form asp-action="Create" method="post">
                 <div class="form-row">
                     <div class="form-group">
@@ -51,6 +53,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Food Packs Table Card -->
 <div class="card">
@@ -116,4 +119,4 @@
         });
 
     </script>
-}
+} *@

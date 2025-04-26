@@ -1,0 +1,185 @@
+﻿@model IEnumerable<SocialWelfarre.Models.Certificate_Of_Indigency>
+
+@{
+    ViewData["Title"] = "Certificate of Indigency Applications";
+    Layout = "/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<style>
+    .form-select {
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+        .form-select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+            outline: none;
+        }
+
+        .form-select:hover {
+            border-color: #6c757d;
+        }
+
+    .form-group label {
+        font-weight: 500;
+        color: #343a40;
+        margin-bottom: 8px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .form-group {
+        flex: 1;
+        min-width: 200px;
+    }
+</style>
+
+<!-- Certificate of Indigency Applications Card -->
+<div class="card">
+    <div class="card-body">
+        <!-- Add Application Form Section -->
+        <div class="form-section">
+            <h4><i class="fas fa-plus-circle"></i> Add New Application</h4>
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().FirstName)" class="form-label"><i class="fas fa-user"></i> First Name</label>
+                        <input asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().FirstName)" class="form-control" placeholder="Enter First Name" required />
+                        <span asp-validation-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().FirstName)" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().MiddleName)" class="form-label"><i class="fas fa-user"></i> Middle Name</label>
+                        <input asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().MiddleName)" class="form-control" placeholder="Enter Middle Name" />
+                        <span asp-validation-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().MiddleName)" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().LastName)" class="form-label"><i class="fas fa-user"></i> Last Name</label>
+                        <input asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().LastName)" class="form-control" placeholder="Enter Last Name" required />
+                        <span asp-validation-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().LastName)" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Age)" class="form-label"><i class="fas fa-birthday-cake"></i> Age</label>
+                        <input asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Age)" class="form-control" type="number" placeholder="Enter Age" required />
+                        <span asp-validation-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Age)" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Barangay)" class="form-label"><i class="fas fa-map-marker-alt"></i> Barangay</label>
+                        <select asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Barangay)" class="form-select">
+                            <option value="">-- Select Barangay --</option>
+                            @foreach (var barangay in Html.GetEnumSelectList<Barangay>())
+                            {
+                                <option value="@barangay.Value">@barangay.Text</option>
+                            }
+                        </select>
+                        <span asp-validation-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Barangay)" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Address)" class="form-label"><i class="fas fa-home"></i> Address</label>
+                        <input asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Address)" class="form-control" placeholder="Enter Address" required />
+                        <span asp-validation-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Address)" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().ContactNumber)" class="form-label"><i class="fas fa-phone"></i> Contact Number</label>
+                        <input asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().ContactNumber)" class="form-control" placeholder="Enter Contact Number" required />
+                        <span asp-validation-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().ContactNumber)" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Brgy_Cert)" class="form-label"><i class="fas fa-file-alt"></i> Barangay Certificate</label>
+                        <input asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Brgy_Cert)" class="form-control" placeholder="Enter Barangay Certificate" required />
+                        <span asp-validation-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Brgy_Cert)" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Valid_ID)" class="form-label"><i class="fas fa-id-card"></i> Valid ID</label>
+                        <input asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Valid_ID)" class="form-control" placeholder="Enter Valid ID" required />
+                        <span asp-validation-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Valid_ID)" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Reason)" class="form-label"><i class="fas fa-comment"></i> Reason</label>
+                        <select asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Reason)" class="form-select">
+                            <option value="">-- Select Reason --</option>
+                            @foreach (var reason in Html.GetEnumSelectList<Reason>())
+                            {
+                                <option value="@reason.Value">@reason.Text</option>
+                            }
+                        </select>
+                        <span asp-validation-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Reason)" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Status)" class="form-label"><i class="fas fa-info-circle"></i> Status</label>
+                        <select asp-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Status)" class="form-select">
+                            <option value="">-- Select Status --</option>
+                            @foreach (var status in Html.GetEnumSelectList<ActiveStatus>())
+                            {
+                                <option value="@status.Value">@status.Text</option>
+                            }
+                        </select>
+                        <span asp-validation-for="@(new SocialWelfarre.Models.Certificate_Of_Indigency().Status)" class="text-danger"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-save"></i> Add Application</button>
+            </form>
+        </div>
+
+        <!-- Applications Table Section -->
+        <div class="table-section mt-4">
+            <table id="example1" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-user"></i> @Html.DisplayNameFor(model => model.FullName)</th>
+                        <th><i class="fas fa-birthday-cake"></i> @Html.DisplayNameFor(model => model.Age)</th>
+                        <th><i class="fas fa-map-marker-alt"></i> @Html.DisplayNameFor(model => model.Barangay)</th>
+                        <th><i class="fas fa-home"></i> @Html.DisplayNameFor(model => model.Address)</th>
+                        <th><i class="fas fa-phone"></i> @Html.DisplayNameFor(model => model.ContactNumber)</th>
+                        <th><i class="fas fa-file-alt"></i> @Html.DisplayNameFor(model => model.Brgy_Cert)</th>
+                        <th><i class="fas fa-id-card"></i> @Html.DisplayNameFor(model => model.Valid_ID)</th>
+                        <th><i class="fas fa-comment"></i> @Html.DisplayNameFor(model => model.Reason)</th>
+                        <th><i class="fas fa-info-circle"></i> @Html.DisplayNameFor(model => model.Status)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Age)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Barangay)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ContactNumber)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Brgy_Cert)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Valid_ID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Reason)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-action"><i class="fa fa-edit"></i> Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-action"><i class="fa fa-eye"></i> View</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-action"><i class="fa fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
